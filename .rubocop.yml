@@ -4,6 +4,8 @@ AllCops:
     - "config/**/*"
     - "Guardfile"
     - "Rakefile"
+  Include:
+    - '**/*.rb'
   DisplayCopNames: true
 
 Metrics/LineLength:
