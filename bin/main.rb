@@ -15,30 +15,55 @@ class Board
     puts "Insert player1's name"
     name = gets.chomp
     @player1.setName(name)
-    puts "Welcome #{@player1}"
-    
+    puts "Welcome #{@player1.getName}"
+
     puts "Insert player2's name"
     name = gets.chomp
     @player2.setName(name)
-    puts "Welcome #{@player2}"
+    puts "Welcome #{@player2.getName}"
   end
 
   def printName
-    puts @player1.getName 
+    puts @player1.getName
   end
 
   def draw
-    puts '   |   |   '
+    mv = @player1.getMove
+    printf(' %d | %d | %d \n', mv[0], mv[1], mv[2])
     puts '-----------'
-    puts '   |   |   '
+    puts ' %d | %d | %d '
     puts '-----------'
-    puts '   |   |   '
+    puts ' %d | %d | %d '
   end
 end
 
 class Player
   @name
   @move
+
+  def initialize
+    @move = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  end
+
+  def setMove
+    puts "Select a number to 1 to 9 to set a position"
+    puts ' 1 | 2 | 3 '
+    puts '-----------'
+    puts ' 4 | 5 | 6 '
+    puts '-----------'
+    puts ' 7 | 8 | 9 '
+
+    move = gets.to_i - 1
+    @move[move] = 1
+
+    puts @move.to_s
+
+  end
+
+  def getMove
+    @move
+  end
+
   def setName(name)
     @name = name
   end
@@ -49,8 +74,11 @@ class Player
 end
 
 mplayer1 = Player.new
+mplayer1.setMove
 mplayer2 = Player.new
 myBoard = Board.new(mplayer1, mplayer2)
+myBoard.draw
+
 
 myBoard.getPlayerNames
 
