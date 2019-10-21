@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-class Main
+class Game
 end
 
 class Board
@@ -13,46 +13,40 @@ class Board
   end
 
   # Method collecting the names of the player
-  def getPlayerNames
+  def ask_names
     system 'clear'
     puts "Insert player1's name"
     name = gets.chomp
-    @player1.setName(name)
-    puts "Welcome #{@player1.getName}"
+    @player1.name = name
+    puts "Welcome #{@player1.name}"
     system 'clear'
     puts "Insert player2's name"
     name = gets.chomp
-    @player2.setName(name)
-    puts "Welcome #{@player2.getName}" # .getName enables output to have the name of the player
+    @player2.name = name
+    puts "Welcome #{@player2.name}" # .name enables output to have the name of the player
   end
 
-  # Printing of players names
-  def printName
-    puts @player1.getName
-    puts @player2.getName
-  end
-
-  def setMark
-
+  def mark
     player = @flag ? @player1 : @player2
 
     @flag = !@flag
 
-    puts "#{player.getName} please pick a number to set your \"#{player.getsymbol}\" mark: \n"
+    puts "#{player.name} please pick a number to set your \"#{player.getsymbol}\" mark: \n"
     move = gets.to_i - 1
     system 'clear'
 
-    if @blocks[move] === ' '
+    if @blocks[move] == ' '
       @blocks[move] = player.getsymbol
-      player.setMove(move)
+      player.move(move)
     else
       puts "that mark can't be done, because the block is not empty, try again..."
     end
   end
 
-  def countEmpties
-    @blocks.count {|i| i === ' '}
+  def count_empties
+    @blocks.count { |i| i == ' ' }
   end
+
   # Displays positions of the board that have been taken
   def draw
     system 'clear'
@@ -73,6 +67,9 @@ class Board
 end
 
 class Player
+  attr_reader :name
+  attr_writer :name
+
   def initialize(symbol)
     @move = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] # Positions on the board
     @symbol = symbol
@@ -80,33 +77,22 @@ class Player
   end
 
   # Marks the position of the user input
-  def setMove(pos)
+  def move(pos)
     @move[pos] = @symbol
-  end
-
-  # Sets the name of the player
-  def setName(name)
-    @name = name
   end
 
   def getsymbol
     @symbol
   end
-
-  # Collects Name of the player
-  def getName
-    @name
-  end
 end
 
 mplayer1 = Player.new('X')
 mplayer2 = Player.new('O')
-myBoard = Board.new(mplayer1, mplayer2)
-myBoard.getPlayerNames
-myBoard.draw
+my_board = Board.new(mplayer1, mplayer2)
+my_board.ask_names
+my_board.draw
 
-while myBoard.countEmpties > 0
-  myBoard.setMark
-  myBoard.draw
+while my_board.count_empties.positive?
+  my_board.mark
+  my_board.draw
 end
-
