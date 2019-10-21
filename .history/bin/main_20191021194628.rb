@@ -30,7 +30,7 @@ class Board
 
   def draw
     mv = @player1.getMove
-    printf(' %d | %d | %d \n', mv[1], mv[2], mv[3])
+    printf(' %d | %d | %d \n', mv[0], mv[1], mv[2])
     puts '-----------'
     puts ' %d | %d | %d '
     puts '-----------'
@@ -43,11 +43,11 @@ class Player
   @move
 
   def initialize
-    @move = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @move = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   end
 
   def setMove
-    puts "Select a number 1 to 9 to set a position"
+    puts "Select a number to 1 to 9 to set a position"
     puts ' 1 | 2 | 3 '
     puts '-----------'
     puts ' 4 | 5 | 6 '

@@ -47,7 +47,7 @@ class Player
   end
 
   def setMove
-    puts "Select a number 1 to 9 to set a position"
+    puts "Select a number to 1 to 9 to set a position"
     puts ' 1 | 2 | 3 '
     puts '-----------'
     puts ' 4 | 5 | 6 '
