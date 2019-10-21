@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'io/console'
+
 class Game
 end
 
@@ -18,12 +20,11 @@ class Board
     puts "Insert player1's name"
     name = gets.chomp
     @player1.name = name
-    puts "Welcome #{@player1.name}"
+
     system 'clear'
     puts "Insert player2's name"
     name = gets.chomp
     @player2.name = name
-    puts "Welcome #{@player2.name}" # .name enables output to have the name of the player
   end
 
   def mark
@@ -39,7 +40,7 @@ class Board
       @blocks[move] = player.getsymbol
       player.move(move)
     else
-      puts "that mark can't be done, because the block is not empty, try again..."
+      key_tocontinue 'that mark can\'t be done, because the block is not empty, try again...'
     end
   end
 
@@ -63,6 +64,12 @@ class Board
   def compare
     (0..@blocks.legth).each do |i|
     end
+  end
+
+  def key_tocontinue(msg)
+    system 'clear'
+    puts msg + "\npress a key to continue..."
+    STDIN.getch
   end
 end
 
