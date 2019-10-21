@@ -15,12 +15,12 @@ class Board
     puts "Insert player1's name"
     name = gets.chomp
     @player1.setName(name)
-    puts "Welcome #{@player1}"
+    puts "Welcome #{player1}"
     
-    puts "Insert player2's name"
-    name = gets.chomp
-    @player2.setName(name)
-    puts "Welcome #{@player2}"
+    #puts "Insert player2's name"
+    #name = gets.chomp
+    #@player2.setName(name)
+    #puts "Welcome #{player2}"
   end
 
   def printName

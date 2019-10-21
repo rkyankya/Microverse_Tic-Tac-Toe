@@ -15,12 +15,11 @@ class Board
     puts "Insert player1's name"
     name = gets.chomp
     @player1.setName(name)
-    puts "Welcome #{@player1}"
-    
+    puts "Welcome #{player1}"
     puts "Insert player2's name"
     name = gets.chomp
-    @player2.setName(name)
-    puts "Welcome #{@player2}"
+    @player1.setName(name)
+    puts "Welcome #{player2}"
   end
 
   def printName
@@ -52,5 +51,5 @@ mplayer1 = Player.new
 mplayer2 = Player.new
 myBoard = Board.new(mplayer1, mplayer2)
 
-myBoard.getPlayerNames
+myBoard.getPlaterNames
 
