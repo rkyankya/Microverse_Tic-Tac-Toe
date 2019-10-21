@@ -30,20 +30,22 @@ class Board
 
   def draw
     mv = @player1.getMove
-    printf(' %d | %d | %d \n', mv[1], mv[2], mv[3])
+    printf(" %s | %s | %s \n", mv[0], mv[1], mv[2])
     puts '-----------'
-    puts ' %d | %d | %d '
+    printf(" %s | %s | %s \n", mv[3], mv[4], mv[5])
     puts '-----------'
-    puts ' %d | %d | %d '
+    printf(" %s | %s | %s \n", mv[6], mv[7], mv[8])
   end
 end
 
 class Player
   @name
   @move
+  @symbol
 
-  def initialize
-    @move = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  def initialize(symbol)
+    @move = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @symbol = symbol
   end
 
   def setMove
@@ -55,7 +57,7 @@ class Player
     puts ' 7 | 8 | 9 '
 
     move = gets.to_i - 1
-    @move[move] = 1
+    @move[move] = @symbol
 
     puts @move.to_s
 
@@ -74,12 +76,9 @@ class Player
   end
 end
 
-mplayer1 = Player.new
-mplayer1.setMove
-mplayer2 = Player.new
+mplayer1 = Player.new("X")
+mplayer2 = Player.new("O")
 myBoard = Board.new(mplayer1, mplayer2)
-myBoard.draw
-
-
 myBoard.getPlayerNames
-
+mplayer1.setMove
+myBoard.draw
