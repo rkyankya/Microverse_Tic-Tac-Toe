@@ -6,6 +6,8 @@ class Board
   @player1
   @player2
 
+  @blocks = [0,0,0,0,0,0,0,0,0]
+
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
@@ -30,6 +32,13 @@ class Board
 
   def draw
     mv = @player1.getMove
+    printf(" %s | %s | %s \n", mv[0], mv[1], mv[2])
+    puts '-----------'
+    printf(" %s | %s | %s \n", mv[3], mv[4], mv[5])
+    puts '-----------'
+    printf(" %s | %s | %s \n", mv[6], mv[7], mv[8])
+
+    mv = @player2.getMove
     printf(" %s | %s | %s \n", mv[0], mv[1], mv[2])
     puts '-----------'
     printf(" %s | %s | %s \n", mv[3], mv[4], mv[5])
@@ -81,4 +90,6 @@ mplayer2 = Player.new("O")
 myBoard = Board.new(mplayer1, mplayer2)
 myBoard.getPlayerNames
 mplayer1.setMove
+myBoard.draw
+mplayer2.setMove
 myBoard.draw
