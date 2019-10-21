@@ -3,7 +3,6 @@
 class Board
     initialize
 
-    arr = []
     puts "__|__|__"
     puts "__|__|__"
     puts "  |  |  "
