@@ -58,7 +58,7 @@ class Player
   @symbol
 
   def initialize(symbol)
-   @move = ['1', '2', '3', '4', '5', '6', '7', '8', '9'] # Positions on the board
+   # @move = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] # Positions on the board
     @symbol = symbol
   end
 
