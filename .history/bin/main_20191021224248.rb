@@ -27,7 +27,7 @@ class Board
     puts @player1.getName
     puts @player2.getName
   end
-# Displays positions of the board that have been taken
+
   def draw
     mv = @player1.getMove
     printf(" %s | %s | %s \n", mv[0], mv[1], mv[2])

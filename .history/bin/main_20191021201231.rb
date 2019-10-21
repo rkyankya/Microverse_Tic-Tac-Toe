@@ -2,15 +2,15 @@
 # frozen_string_literal: true
 
 class Board
-# Class  Board for 2 Players [Tic_Tac_Toe]
+
   @player1
   @player2
-# Method initializing the 2 players
+
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
   end
-# Method collecting the names of the player
+
   def getPlayerNames
     puts "Insert player1's name"
     name = gets.chomp
@@ -20,14 +20,14 @@ class Board
     puts "Insert player2's name"
     name = gets.chomp
     @player2.setName(name)
-    puts "Welcome #{@player2.getName}" # .getName enables output to have the name of the player
+    puts "Welcome #{@player2.getName}"
   end
-# Printing of players names
+
   def printName
     puts @player1.getName
     puts @player2.getName
   end
-# Displays positions of the board that have been taken
+
   def draw
     mv = @player1.getMove
     printf(" %s | %s | %s \n", mv[0], mv[1], mv[2])

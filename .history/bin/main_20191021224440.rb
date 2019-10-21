@@ -47,8 +47,8 @@ class Player
     @move = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     @symbol = symbol
     
-    @move = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    @symbol = symbol
+   # @move = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+   # @symbol = symbol
   end
 
   def setMove
