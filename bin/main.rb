@@ -33,6 +33,7 @@ class Board
     @player2 = player2
     @blocks = Array.new(9, ' ')
     @flag = true
+    @winner = nil
 
     @winner_patterns = [
       [1, 1, 1, 0, 0, 0, 0, 0, 0],
@@ -44,21 +45,16 @@ class Board
       [1, 0, 0, 0, 1, 0, 0, 0, 1],
       [0, 0, 1, 0, 1, 0, 1, 0, 0]
     ]
-
-    @winner = nil
   end
 
   # Method collecting the names of the player
   def ask_names
-    system 'clear'
-    puts "Insert player1's name"
-    name = gets.chomp
-    @player1.name = name
-
-    system 'clear'
-    puts "Insert player2's name"
-    name = gets.chomp
-    @player2.name = name
+    [@player1, @player2].each_with_index do |ply, index|
+      system 'clear'
+      puts 'Insert player' + (index + 1).to_s + "'s name"
+      name = gets.chomp
+      ply.name = name
+    end
   end
 
   def mark
