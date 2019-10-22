@@ -34,15 +34,16 @@ class Board
     @blocks = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     @flag = true
 
-    @winner_patterns = []
-    @winner_patterns.push([1, 1, 1, 0, 0, 0, 0, 0, 0])
-    @winner_patterns.push([0, 0, 0, 1, 1, 1, 0, 0, 0])
-    @winner_patterns.push([0, 0, 0, 0, 0, 0, 1, 1, 1])
-    @winner_patterns.push([1, 0, 0, 1, 0, 0, 1, 0, 0])
-    @winner_patterns.push([0, 1, 0, 0, 1, 0, 0, 1, 0])
-    @winner_patterns.push([0, 0, 1, 0, 0, 1, 0, 0, 1])
-    @winner_patterns.push([1, 0, 0, 0, 1, 0, 0, 0, 1])
-    @winner_patterns.push([0, 0, 1, 0, 1, 0, 1, 0, 0])
+    @winner_patterns = [
+      [1, 1, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 0, 0, 1, 0, 0, 1, 0, 0],
+      [0, 1, 0, 0, 1, 0, 0, 1, 0],
+      [0, 0, 1, 0, 0, 1, 0, 0, 1],
+      [1, 0, 0, 0, 1, 0, 0, 0, 1],
+      [0, 0, 1, 0, 1, 0, 1, 0, 0]
+    ]
 
     @winner = nil
   end
@@ -65,7 +66,7 @@ class Board
 
     puts "#{player.name} please pick a number to set your \"#{player.getsymbol}\" mark: \n"
     move = gets.to_i - 1
-    # system 'clear'
+    system 'clear'
 
     if @blocks[move] == ' '
       @blocks[move] = player.getsymbol
@@ -83,12 +84,10 @@ class Board
   def check_winner(player)
     arr = player.move.map { |i| i != ' ' ? 1 : 0 }
 
-    puts arr.to_s
     @winner_patterns.any? do |i|
       r = i.each_with_index.inject(0) do |acc, (val, index)|
         val == arr[index] && val == 1 ? acc + 1 : acc
       end
-      puts r.to_s
       r == 3
     end
   end
@@ -99,7 +98,7 @@ class Board
 
   # Displays positions of the board that have been taken
   def draw
-    # system 'clear'
+    system 'clear'
     mv = @blocks # Marks X for position occupied by player1
     printf(" 1 | 2 | 3        %s | %s | %s \n", mv[0], mv[1], mv[2])
     puts '-----------      -----------'
