@@ -75,12 +75,8 @@ class Board
   end
 
   def check_winner(player)
-    arr = player.move.map { |i| i != ' ' ? 1 : 0 }
-
     @winner_patterns.any? do |i|
-      i.all? do |item|
-        arr[item] == 1
-      end
+      i.all? { |item| player.move[item] != ' ' }
     end
   end
 
