@@ -64,12 +64,12 @@ class Board
   def mark
     player = @flag ? @player1 : @player2
 
-    puts "#{player.name} please pick a number to set your \"#{player.getsymbol}\" mark: \n"
+    puts "#{player.name} please pick a number to set your \"#{player.symbol}\" mark: \n"
     move = gets.to_i - 1
     system 'clear'
 
     if @blocks[move] == ' '
-      @blocks[move] = player.getsymbol
+      @blocks[move] = player.symbol
       player.mark_symbol(move)
 
       puts player.move.to_s
@@ -119,6 +119,7 @@ end
 class Player
   attr_accessor :name
   attr_accessor :move
+  attr_reader :symbol
 
   def initialize(symbol)
     @move = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] # Positions on the board
@@ -129,10 +130,6 @@ class Player
   # Marks the position of the user input
   def mark_symbol(pos)
     @move[pos] = @symbol
-  end
-
-  def getsymbol
-    @symbol
   end
 end
 
