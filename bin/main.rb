@@ -38,15 +38,22 @@ class Board
     @has_movs = true
 
     @winner_patterns = [
-      [1, 1, 1, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 1, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 1, 1, 1],
-      [1, 0, 0, 1, 0, 0, 1, 0, 0],
-      [0, 1, 0, 0, 1, 0, 0, 1, 0],
-      [0, 0, 1, 0, 0, 1, 0, 0, 1],
-      [1, 0, 0, 0, 1, 0, 0, 0, 1],
-      [0, 0, 1, 0, 1, 0, 1, 0, 0]
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
     ]
+
+    generate_patter(@winner_patterns)
+  end
+
+  def generate_patter(input)
+    input.each_with_index do |item, index|
+      arr = Array.new(9, 0)
+      item.each do |j|
+        arr[j] = 1
+      end
+      input[index] = arr
+    end
   end
 
   # Method collecting the names of the player
