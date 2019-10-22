@@ -31,7 +31,7 @@ class Board
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
-    @blocks = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    @blocks = Array.new(9, ' ')
     @flag = true
 
     @winner_patterns = [
@@ -122,7 +122,7 @@ class Player
   attr_reader :symbol
 
   def initialize(symbol)
-    @move = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] # Positions on the board
+    @move = Array.new(9, ' ') # Positions on the board
     @symbol = symbol
     @status = false
   end
