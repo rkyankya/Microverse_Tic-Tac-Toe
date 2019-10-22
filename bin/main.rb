@@ -49,9 +49,7 @@ class Board
   def generate_patter(input)
     input.each_with_index do |item, index|
       arr = Array.new(9, 0)
-      item.each do |j|
-        arr[j] = 1
-      end
+      item.each { |j| arr[j] = 1 }
       input[index] = arr
     end
   end
