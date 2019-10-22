@@ -124,7 +124,6 @@ class Player
   def initialize(symbol)
     @move = Array.new(9, ' ') # Positions on the board
     @symbol = symbol
-    @status = false
   end
 
   # Marks the position of the user input
