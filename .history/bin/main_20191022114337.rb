@@ -18,7 +18,7 @@ class Game
     end
 
     if @game_board.winner
-      puts "#{@game_board.winner.name} WINS!!"
+      puts "#{@game_board.winner.name} wins!!"
     else
       puts 'This is a draw'
     end
