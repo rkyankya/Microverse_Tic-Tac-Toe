@@ -42,16 +42,6 @@ class Board
       [0, 3, 6], [1, 4, 7], [2, 5, 8],
       [0, 4, 8], [2, 4, 6]
     ]
-
-    generate_patter(@winner_patterns)
-  end
-
-  def generate_patter(input)
-    input.each_with_index do |item, index|
-      arr = Array.new(9, 0)
-      item.each { |j| arr[j] = 1 }
-      input[index] = arr
-    end
   end
 
   # Method collecting the names of the player
@@ -88,10 +78,9 @@ class Board
     arr = player.move.map { |i| i != ' ' ? 1 : 0 }
 
     @winner_patterns.any? do |i|
-      r = i.each_with_index.inject(0) do |acc, (val, index)|
-        val == arr[index] && val == 1 ? acc + 1 : acc
+      i.all? do |item|
+        arr[item] == 1
       end
-      r == 3
     end
   end
 
