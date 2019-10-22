@@ -37,7 +37,7 @@ class Board
     @winner = nil
     @has_movs = true
 
-    @winner_patterns = [
+    @winner_positions = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8],
       [0, 3, 6], [1, 4, 7], [2, 5, 8],
       [0, 4, 8], [2, 4, 6]
@@ -75,7 +75,7 @@ class Board
   end
 
   def check_winner(player)
-    @winner_patterns.any? do |i|
+    @winner_positions.any? do |i|
       i.all? { |item| player.move[item] != ' ' }
     end
   end
