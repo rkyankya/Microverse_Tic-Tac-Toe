@@ -4,14 +4,47 @@
 require 'io/console'
 
 class Game
+  def initialize(board)
+    @game_board = board
+
+    @game_board.ask_names
+    @game_board.draw
+  end
+
+  def start
+    while @game_board.count_empties.positive? && !@game_board.winner
+      @game_board.mark
+      @game_board.draw
+    end
+
+    if @game_board.winner
+      puts "#{@game_board.winner.name} wins!!"
+    else
+      puts 'this is a draw'
+    end
+  end
 end
 
 class Board
+  attr_reader :winner
+
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
     @blocks = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     @flag = true
+
+    @winner_patterns = []
+    @winner_patterns.push([1, 1, 1, 0, 0, 0, 0, 0, 0])
+    @winner_patterns.push([0, 0, 0, 1, 1, 1, 0, 0, 0])
+    @winner_patterns.push([0, 0, 0, 0, 0, 0, 1, 1, 1])
+    @winner_patterns.push([1, 0, 0, 1, 0, 0, 1, 0, 0])
+    @winner_patterns.push([0, 1, 0, 0, 1, 0, 0, 1, 0])
+    @winner_patterns.push([0, 0, 1, 0, 0, 1, 0, 0, 1])
+    @winner_patterns.push([1, 0, 0, 0, 1, 0, 0, 0, 1])
+    @winner_patterns.push([0, 0, 1, 0, 1, 0, 1, 0, 0])
+
+    @winner = nil
   end
 
   # Method collecting the names of the player
@@ -30,17 +63,26 @@ class Board
   def mark
     player = @flag ? @player1 : @player2
 
-    @flag = !@flag
-
     puts "#{player.name} please pick a number to set your \"#{player.getsymbol}\" mark: \n"
     move = gets.to_i - 1
     system 'clear'
 
     if @blocks[move] == ' '
       @blocks[move] = player.getsymbol
-      player.move(move)
+      player.mark_symbol(move)
+
+      @winner = check_winner(player) ? player : nil
+
+      @flag = !@flag
     else
       key_tocontinue 'that mark can\'t be done, because the block is not empty, try again...'
+    end
+  end
+
+  def check_winner(player)
+    arr = player.move.map { |i| i != ' ' ? 1 : 0 }
+    @winner_patterns.any? do |i|
+      arr == i
     end
   end
 
@@ -61,11 +103,6 @@ class Board
     puts '============================'
   end
 
-  def compare
-    (0..@blocks.legth).each do |i|
-    end
-  end
-
   def key_tocontinue(msg)
     system 'clear'
     puts msg + "\npress a key to continue..."
@@ -77,6 +114,9 @@ class Player
   attr_reader :name
   attr_writer :name
 
+  attr_reader :move
+  attr_writer :move
+
   def initialize(symbol)
     @move = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] # Positions on the board
     @symbol = symbol
@@ -84,7 +124,7 @@ class Player
   end
 
   # Marks the position of the user input
-  def move(pos)
+  def mark_symbol(pos)
     @move[pos] = @symbol
   end
 
@@ -96,10 +136,6 @@ end
 mplayer1 = Player.new('X')
 mplayer2 = Player.new('O')
 my_board = Board.new(mplayer1, mplayer2)
-my_board.ask_names
-my_board.draw
 
-while my_board.count_empties.positive?
-  my_board.mark
-  my_board.draw
-end
+my_game = Game.new(my_board)
+my_game.start
