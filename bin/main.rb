@@ -117,11 +117,8 @@ class Board
 end
 
 class Player
-  attr_reader :name
-  attr_writer :name
-
-  attr_reader :move
-  attr_writer :move
+  attr_accessor :name
+  attr_accessor :move
 
   def initialize(symbol)
     @move = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '] # Positions on the board
