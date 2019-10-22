@@ -12,7 +12,7 @@ class Game
   end
 
   def start
-    while @game_board.count_empties.positive? && !@game_board.winner
+    while @game_board.has_movs
       @game_board.mark
       @game_board.draw
     end
@@ -27,6 +27,7 @@ end
 
 class Board
   attr_reader :winner
+  attr_reader :has_movs
 
   def initialize(player1, player2)
     @player1 = player1
@@ -34,6 +35,7 @@ class Board
     @blocks = Array.new(9, ' ')
     @flag = true
     @winner = nil
+    @has_movs = true
 
     @winner_patterns = [
       [1, 1, 1, 0, 0, 0, 0, 0, 0],
@@ -68,8 +70,8 @@ class Board
       @blocks[move] = player.symbol
       player.mark_symbol(move)
 
-      puts player.move.to_s
       @winner = check_winner(player) ? player : nil
+      @has_movs = !@winner && count_empties.positive? ? true : false
 
       @flag = !@flag
     else
