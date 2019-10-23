@@ -3,12 +3,13 @@
 class Board
   attr_reader :winner
   attr_reader :has_movs
+  attr_reader :player_turn
 
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
     @blocks = Array.new(9, ' ')
-    @flag = true
+    @player_turn = player1
     @winner = nil
     @has_movs = true
 
@@ -19,31 +20,15 @@ class Board
     ]
   end
 
-  # Method collecting the names of the player
-  def ask_names
-    [@player1, @player2].each_with_index do |ply, index|
-      system 'clear'
-      puts 'Insert player' + (index + 1).to_s + "'s name"
-      name = gets.chomp
-      ply.name = name
-    end
-  end
-
-  def mark
-    player = @flag ? @player1 : @player2
-
-    puts "#{player.name} please pick a number to set your \"#{player.symbol}\" mark: \n"
-    move = gets.to_i - 1
-    system 'clear'
-
+  def mark(move)
     if @blocks[move] == ' '
-      @blocks[move] = player.symbol
-      player.mark_symbol(move)
+      @blocks[move] = player_turn.symbol
+      player_turn.mark_symbol(move)
 
-      @winner = check_winner(player) ? player : nil
+      @winner = check_winner(player_turn) ? player_turn : nil
       @has_movs = !@winner && count_empties.positive? ? true : false
 
-      @flag = !@flag
+      @player_turn = @player_turn == @player1 ? @player2 : @player1
     else
       key_tocontinue 'that mark can\'t be done, because the block is not empty, try again...'
     end
