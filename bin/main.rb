@@ -2,9 +2,9 @@
 # frozen_string_literal: true
 
 require 'io/console'
-require_relative 'game.rb'
-require_relative 'board.rb'
-require_relative 'player.rb'
+require_relative '../lib/game.rb'
+require_relative '../lib/board.rb'
+require_relative '../lib/player.rb'
 
 mplayer1 = Player.new('X')
 mplayer2 = Player.new('O')
