@@ -21,7 +21,7 @@ describe 'board' do
     expect(my_board.winner).to be mplayer1
   end
 
-  it 'test 2' do
+  it 'test 1' do
     my_board.reset
 
     my_board.mark(8)
