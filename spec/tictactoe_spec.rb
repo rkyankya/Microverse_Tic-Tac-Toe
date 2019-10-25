@@ -4,18 +4,6 @@ require 'io/console'
 require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
-def draw(blocks)
-  system 'clear'
-  mv = blocks # Marks X for position occupied by player1
-  printf(" 1 | 2 | 3        %s | %s | %s \n", mv[0], mv[1], mv[2])
-  puts '-----------      -----------'
-  printf(" 4 | 5 | 6   =>   %s | %s | %s \n", mv[3], mv[4], mv[5])
-  puts '-----------      -----------'
-  printf(" 7 | 8 | 9        %s | %s | %s \n", mv[6], mv[7], mv[8])
-
-  puts '============================'
-end
-
 describe 'board' do
   mplayer1 = Player.new('X')
   mplayer2 = Player.new('O')
