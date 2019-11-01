@@ -4,7 +4,7 @@ require 'io/console'
 require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
-describe 'board' do
+describe 'Board' do
   mplayer1 = Player.new('X')
   mplayer2 = Player.new('O')
   my_board = Board.new(mplayer1, mplayer2)
@@ -316,6 +316,52 @@ describe 'board' do
     it 'count_empties after mark 9 blocks' do
       my_board.mark(7)
       expect(my_board.count_empties).to eq(0)
+    end
+  end
+end
+
+describe 'Player' do
+  mplayer1 = Player.new('X')
+  before(:each) do
+    mplayer1.move = Array.new(9, ' ')
+  end
+
+  describe 'mark_symbol' do
+    it 'set move to position 1' do
+      mplayer1.mark_symbol(0)
+      expect(mplayer1.move[0]).to be mplayer1.symbol
+    end
+    it 'set move to position 2' do
+      mplayer1.mark_symbol(1)
+      expect(mplayer1.move[1]).to be mplayer1.symbol
+    end
+    it 'set move to position 3' do
+      mplayer1.mark_symbol(2)
+      expect(mplayer1.move[2]).to be mplayer1.symbol
+    end
+    it 'set move to position 4' do
+      mplayer1.mark_symbol(3)
+      expect(mplayer1.move[3]).to be mplayer1.symbol
+    end
+    it 'set move to position 5' do
+      mplayer1.mark_symbol(4)
+      expect(mplayer1.move[4]).to be mplayer1.symbol
+    end
+    it 'set move to position 6' do
+      mplayer1.mark_symbol(5)
+      expect(mplayer1.move[5]).to be mplayer1.symbol
+    end
+    it 'set move to position 7' do
+      mplayer1.mark_symbol(6)
+      expect(mplayer1.move[6]).to be mplayer1.symbol
+    end
+    it 'set move to position 8' do
+      mplayer1.mark_symbol(7)
+      expect(mplayer1.move[7]).to be mplayer1.symbol
+    end
+    it 'set move to position 9' do
+      mplayer1.mark_symbol(8)
+      expect(mplayer1.move[8]).to be mplayer1.symbol
     end
   end
 end
