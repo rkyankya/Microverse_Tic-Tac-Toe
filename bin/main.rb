@@ -41,13 +41,25 @@ end
 while play_again
 
   my_board.reset
-  draw(my_board.blocks)
 
   while my_board.has_movs
-    puts "#{my_board.player_turn.name} please pick a number to set your \"#{my_board.player_turn.symbol}\" mark: \n"
-    move = gets.to_i - 1
-    system 'clear'
 
+    move = nil
+    loop do
+      system 'clear'
+      draw(my_board.blocks)
+      puts "#{my_board.player_turn.name} please pick a number to set your \"#{my_board.player_turn.symbol}\" mark: \n"
+      move = gets.to_s
+
+      if move.match(/\b[1-9]\b/)
+        move = move.to_i - 1
+        break
+      else
+        key_tocontinue('only numbers betwen 1 and 9 are allowed')
+      end
+    end
+
+    system 'clear'
     key_tocontinue('that mark can\'t be done, because the block is not empty, try again...') unless my_board.mark(move)
 
     draw(my_board.blocks)
